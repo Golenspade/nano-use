@@ -1,0 +1,17 @@
+<svg width="1280" height="700" viewBox="0 0 1280 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">nano-use logo dark mode</title>
+  <desc id="desc">Dark-mode nano-use logo with a light n mark, mint cursor, and white wordmark.</desc>
+  <defs>
+    <linearGradient id="mint" x1="545" y1="155" x2="775" y2="370" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <circle cx="501" cy="92" r="23" fill="#34D399"/>
+    <circle cx="552" cy="96" r="11" fill="#6EE7B7"/>
+    <path d="M512 342V142C512 129.85 521.85 120 534 120H558C570.15 120 580 129.85 580 142V166C602.5 135.4 635.3 116 677 116C736.5 116 774 158.5 774 226V342H706V242C706 205.2 687 184 654 184C619.2 184 580 213.5 580 270V342H512Z" fill="#F1F5F9"/>
+    <path d="M713 254L826 363L771 375L801 442L758 462L730 395L686 436L713 254Z" fill="url(#mint)" stroke="#0D1117" stroke-width="14" stroke-linejoin="round"/>
+  </g>
+  <text x="640" y="635" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="112" font-weight="800" letter-spacing="-4" fill="#F8FAFC">nano-use</text>
+</svg>

@@ -1,22 +1,17 @@
-<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1280" height="700" viewBox="0 0 1280 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">nano-use logo</title>
-  <desc id="desc">A compact n mark with a cursor, representing lightweight action-oriented automation.</desc>
+  <desc id="desc">Light-mode nano-use logo with a gray n mark, mint cursor, and black wordmark.</desc>
   <defs>
-    <linearGradient id="bg" x1="128" y1="128" x2="896" y2="896" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#020617"/>
-      <stop offset="1" stop-color="#111827"/>
-    </linearGradient>
-    <linearGradient id="green" x1="310" y1="290" x2="790" y2="784" gradientUnits="userSpaceOnUse">
+    <linearGradient id="mint" x1="545" y1="155" x2="775" y2="370" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#34D399"/>
       <stop offset="1" stop-color="#10B981"/>
     </linearGradient>
-    <filter id="shadow" x="72" y="72" width="880" height="880" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#020617" flood-opacity="0.28"/>
-    </filter>
   </defs>
-  <rect x="128" y="128" width="768" height="768" rx="176" fill="url(#bg)" filter="url(#shadow)"/>
-  <path d="M326 690V350C326 329 343 312 364 312H402C423 312 440 329 440 350V386C477 335 528 309 593 309C681 309 738 370 738 470V690H624V496C624 441 596 410 550 410C498 410 440 454 440 541V690H326Z" fill="#F9FAFB"/>
-  <path d="M646 570L800 718L725 735L765 826L707 852L669 762L610 817L646 570Z" fill="url(#green)" stroke="#ECFDF5" stroke-width="18" stroke-linejoin="round"/>
-  <circle cx="316" cy="316" r="30" fill="#34D399"/>
-  <circle cx="380" cy="316" r="14" fill="#6EE7B7"/>
+  <g>
+    <circle cx="501" cy="92" r="23" fill="#34D399"/>
+    <circle cx="552" cy="96" r="11" fill="#6EE7B7"/>
+    <path d="M512 342V142C512 129.85 521.85 120 534 120H558C570.15 120 580 129.85 580 142V166C602.5 135.4 635.3 116 677 116C736.5 116 774 158.5 774 226V342H706V242C706 205.2 687 184 654 184C619.2 184 580 213.5 580 270V342H512Z" fill="#D1D5DB"/>
+    <path d="M713 254L826 363L771 375L801 442L758 462L730 395L686 436L713 254Z" fill="url(#mint)" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
+  </g>
+  <text x="640" y="635" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="112" font-weight="800" letter-spacing="-4" fill="#020617">nano-use</text>
 </svg>
