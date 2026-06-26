@@ -1,0 +1,12 @@
+[package]
+name = "nano-use"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+screencapturekit = { version = "1.5", features = ["macos_14_0", "macos_15_2"] }
+core-graphics = { version = "0.23", features = ["highsierra"] }
+core-foundation = "0.9"
+base64 = "0.22"
+clap = { version = "4", features = ["derive"] }
+png = "0.17"
