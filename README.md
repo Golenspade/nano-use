@@ -6,64 +6,60 @@
 </p>
 
 <p align="center">
-  Minimal macOS computer-use toolkit.
+  为 Agent 而生的本地 macOS 桌面操控技能。
 </p>
 
 <p align="center">
-  <a href="#overview">Overview</a> ·
-  <a href="#commands">Commands</a> ·
-  <a href="#build">Build</a> ·
-  <a href="#permissions">Permissions</a> ·
-  <a href="#logo">Logo</a>
+  <a href="#overview">项目简介</a> ·
+  <a href="#quick-start">快速上手</a> ·
+  <a href="#examples">使用示例</a> ·
+  <a href="#build">构建</a> ·
+  <a href="#permissions">权限说明</a> ·
+  <a href="#license">开源协议</a>
 </p>
 
 ---
 
-## Overview
+<a id="overview"></a>
 
-`nano-use` is a small Rust CLI for macOS computer-use actions.
+## 项目简介
 
-It provides a compact interface for:
+`nano-use` 是一个为 Agent 设计的本地 macOS 桌面操控技能。它由两部分组成：
 
-- taking a desktop screenshot and writing it as a base64-encoded PNG;
-- sending mouse actions such as click, right click, double click, drag, and scroll;
-- sending keyboard actions such as text input and key combinations.
+- 一个轻量的 Rust CLI，负责在本地执行桌面操作；
+- 一份 `SKILL.md`，告诉 Agent 如何安装和调用这个 CLI。
 
-The project is intentionally narrow: small command surface, explicit coordinates, and direct local execution.
+CLI 提供了一系列底层的桌面操控原语：截屏、鼠标点击、键盘输入、滚动。
 
-## Commands
+`nano-use` 不是自主 Agent。它不会规划，不会决策，不会替你思考。它只是为外部 Agent 提供了一道窄而可靠的本地接口，用来观察和操控桌面。
 
-```bash
-nano-use <COMMAND>
-```
+<a id="quick-start"></a>
 
-| Command | Description |
-|---|---|
-| `screenshot` | Capture the desktop and print a base64-encoded PNG to stdout. |
-| `click <x> <y>` | Left-click at screen coordinate `(x, y)`. |
-| `right_click <x> <y>` | Right-click at screen coordinate `(x, y)`. |
-| `double_click <x> <y>` | Double-click at screen coordinate `(x, y)`. |
-| `drag <x1> <y1> <x2> <y2>` | Drag from `(x1, y1)` to `(x2, y2)`. |
-| `type <text>` | Type text through the macOS keyboard event path. |
-| `keypress <keys>` | Send a key combination, for example `cmd+c` or `shift+tab`. |
-| `scroll <x> <y> <dy>` | Move the cursor to `(x, y)` and send a vertical scroll event. |
+## 快速上手
 
-Supported `keypress` modifiers include:
+安装 `nano-use` 有两种方式：交给 Agent，或者自己动手。
+
+### 让 Agent 自行安装
+
+把仓库地址交给你的 Agent：
 
 ```text
-cmd, command, ctrl, control, alt, option, shift, fn, function
+https://github.com/Golenspade/nano-use
 ```
 
-Supported named keys include common keys such as:
+然后让它读取并执行 `SKILL.md` 中的安装指引。
 
-```text
-enter, return, tab, space, delete, escape, up, down, left, right,
-home, end, pageup, pagedown, forward_delete, f1 ... f12
-```
+Agent 应该完成以下步骤：
 
-Single US-layout characters such as `a`, `b`, `1`, `-`, `/`, and `.` are also supported.
+1. 克隆本仓库；
+2. 构建本地 CLI；
+3. 将二进制文件放到 `PATH` 中的某个位置；
+4. 读取 `SKILL.md` 了解工具契约；
+5. 提醒你授予所需的 macOS 系统权限。
 
-## Build
+### 手动安装
+
+构建 CLI：
 
 ```bash
 git clone https://github.com/Golenspade/nano-use.git
@@ -71,89 +67,80 @@ cd nano-use
 cargo build --release
 ```
 
-Run the CLI from the release binary:
+安装二进制文件：
 
 ```bash
-./target/release/nano-use --help
+mkdir -p ~/.local/bin
+cp target/release/nano-use ~/.local/bin/nano-use
 ```
 
-## Examples
-
-Capture a screenshot and decode it into a PNG on macOS:
+验证安装：
 
 ```bash
-./target/release/nano-use screenshot | base64 -D > screenshot.png
+nano-use --help
 ```
 
-Click and type:
+完成后，让你的 Agent 读取仓库中的 `SKILL.md`。
+
+<a id="examples"></a>
+
+## 使用示例
+
+> 演示 GIF 即将上线。
+
+<!--
+未来 GIF 构想：
+Agent 读取 SKILL.md → 调用 nano-use 截屏 → 观察屏幕 → 执行点击/输入/滚动。
+-->
+
+<a id="build"></a>
+
+## 构建
+
+`nano-use` 是一个 Rust 项目。
 
 ```bash
-./target/release/nano-use click 400 300
-./target/release/nano-use type "hello from nano-use"
+cargo build --release
 ```
 
-Send a keyboard shortcut:
-
-```bash
-./target/release/nano-use keypress cmd+c
-```
-
-Scroll at a coordinate:
-
-```bash
-./target/release/nano-use scroll 600 500 -400
-```
-
-## Permissions
-
-Because `nano-use` controls local screen, mouse, and keyboard behavior, macOS may require permissions before all commands work correctly.
-
-Typical permissions:
-
-- **Screen Recording** for `screenshot`.
-- **Accessibility** for mouse and keyboard actions.
-
-Grant these permissions in macOS System Settings if the command runs but cannot capture or control the UI.
-
-## Project status
-
-`nano-use` is currently an early CLI. The implemented interface is command-line oriented, not a stable library API.
-
-Near-term work:
-
-- add CI and tests;
-- add clearer error messages for macOS permission failures;
-- document coordinate behavior for multi-display setups;
-- add examples for agent/tool integrations;
-- decide license and release workflow.
-
-## Repository layout
+Release 二进制文件生成路径：
 
 ```text
-nano-use/
-├── assets/
-│   └── logo/
-│       ├── nano-use-logo.svg
-│       └── nano-use-logo-dark.svg
-├── src/
-│   └── main.rs
-├── Cargo.toml
-└── README.md
+target/release/nano-use
 ```
 
-## Logo
-
-The current mark is the **Cursor Action** direction: a compact `n` paired with a cursor shape.
-
-The README uses a responsive logo pair:
+当前命令接口：
 
 ```text
-assets/logo/nano-use-logo.svg       # light/default version, black wordmark
-assets/logo/nano-use-logo-dark.svg  # dark-mode version, white wordmark
+screenshot
+click
+right_click
+double_click
+drag
+type
+keypress
+scroll
 ```
 
-This avoids the low-contrast issue where a light-mode README would display a pale wordmark on a light background.
+<a id="permissions"></a>
 
-## License
+## 权限说明
 
-No license has been declared yet. Add a `LICENSE` file before publishing or distributing the project as a reusable package.
+`nano-use` 需要捕获屏幕并控制本地输入，因此必须获得 macOS 的系统权限。
+
+| 权限 | 用途 |
+| --- | --- |
+| 屏幕录制 | 截屏 |
+| 辅助功能 | 鼠标和键盘操作 |
+
+请在 macOS 系统设置中提前开启这些权限，再让 Agent 调用。
+
+如果命令执行后没有截图、或者鼠标键盘没有响应，最常见的原因就是权限尚未正确授予。
+
+<a id="license"></a>
+
+## 开源协议
+
+MIT License。
+
+详见 [`LICENSE`](LICENSE) 文件。
